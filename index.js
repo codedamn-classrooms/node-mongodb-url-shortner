@@ -8,7 +8,7 @@ app.get('/', (req, res) => {
 	res.render('index', { myVariable: 'My name is John!' })
 })
 
-app.post('/', (req, res) => {
+app.post('/short', (req, res) => {
 	const db = mongoose.connection.db
 	// insert the record in 'test' collection
 
