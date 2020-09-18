@@ -7,8 +7,8 @@ const ShortURL = require('./models/url')
 app.set('view engine', 'ejs')
 app.use(express.urlencoded({ extended: false }))
 
-app.get('/', (req, res) => {
-	const allData = [] // write a mongoose query to get all URLs from here
+app.get('/', async (req, res) => {
+	const allData = await ShortURL.find()
 	res.render('index', { shortUrls: allData })
 })
 
