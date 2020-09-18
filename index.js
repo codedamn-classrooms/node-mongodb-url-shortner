@@ -11,14 +11,17 @@ app.get('/', (req, res) => {
 app.post('/short', (req, res) => {
 	const db = mongoose.connection.db
 	// insert the record in 'test' collection
+	db.collection('test').insertOne({ testCompleted: 1 })
 
 	res.json({ ok: 1 })
 })
 
 // Setup your mongodb connection here
-// mongoose.connect(...)
+mongoose.connect('mongodb://localhost/codedamn')
 
-// Wait for mongodb connection before server starts
-app.listen(process.env.PUBLIC_PORT, () => {
-	console.log('Server started')
+mongoose.connection.on('connect', () => {
+	// Wait for mongodb connection before server starts
+	app.listen(process.env.PUBLIC_PORT, () => {
+		console.log('Server started')
+	})
 })
