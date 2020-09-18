@@ -10,13 +10,14 @@ app.get('/', (req, res) => {
 	res.render('index', { myVariable: 'My name is John!' })
 })
 
-app.post('/short', (req, res) => {
+app.post('/short', async (req, res) => {
 	// insert the record using the model
-	new ShortURL({
+	const record = new ShortURL({
 		full: 'test',
 		short: 't',
 		clicks: 0
 	})
+	await record.save()
 	res.json({ ok: 1 })
 })
 
