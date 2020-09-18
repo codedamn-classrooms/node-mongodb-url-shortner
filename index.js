@@ -1,6 +1,7 @@
 const express = require('express')
 const app = express()
 const mongoose = require('mongoose')
+// import the model here
 
 app.set('view engine', 'ejs')
 
@@ -9,9 +10,7 @@ app.get('/', (req, res) => {
 })
 
 app.post('/short', (req, res) => {
-	const db = mongoose.connection.db
-	// insert the record in 'test' collection
-	db.collection('test').insertOne({ testCompleted: 1 })
+	// insert the record using the model
 
 	res.json({ ok: 1 })
 })
