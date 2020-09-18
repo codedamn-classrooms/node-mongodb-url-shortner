@@ -5,24 +5,26 @@ const mongoose = require('mongoose')
 const ShortURL = require('./models/url')
 
 app.set('view engine', 'ejs')
+app.use(express.urlencoded({ extended: false }))
 
 app.get('/', (req, res) => {
-	res.render('index', { myVariable: 'My name is John!' })
+	res.render('index')
 })
 
 app.post('/short', async (req, res) => {
-	// insert the record using the model
-	const record = new ShortURL({
-		full: 'test',
-		short: 't',
-		clicks: 0
-	})
-	await record.save()
-	res.json({ ok: 1 })
+	// Grab the fullUrl parameter from the req.body
+	const fullUrl = req.body.fullUrl
+
+	// insert and wait for the record to be inserted using the model
+
+	res.redirect('/')
 })
 
 // Setup your mongodb connection here
-mongoose.connect('mongodb://localhost/codedamn')
+mongoose.connect('mongodb://localhost/codedamn', {
+	useNewUrlParser: true,
+	useUnifiedTopology: true
+})
 
 mongoose.connection.on('open', () => {
 	// Wait for mongodb connection before server starts
