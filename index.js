@@ -6,7 +6,7 @@ const mongoose = require('mongoose')
 app.set('view engine', 'ejs')
 
 app.get('/', (req, res) => {
-	res.render('index', { myVariable: 'My name is John!' })
+	res.render('index')
 })
 
 app.post('/short', async (req, res) => {
@@ -16,7 +16,10 @@ app.post('/short', async (req, res) => {
 })
 
 // Setup your mongodb connection here
-mongoose.connect('mongodb://localhost/codedamn')
+mongoose.connect('mongodb://localhost/codedamn', {
+	useNewUrlParser: true,
+	useUnifiedTopology: true
+})
 
 mongoose.connection.on('open', () => {
 	// Wait for mongodb connection before server starts
