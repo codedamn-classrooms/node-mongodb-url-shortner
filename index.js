@@ -19,7 +19,7 @@ app.post('/short', (req, res) => {
 // Setup your mongodb connection here
 mongoose.connect('mongodb://localhost/codedamn')
 
-mongoose.connection.on('connect', () => {
+mongoose.connection.on('open', () => {
 	// Wait for mongodb connection before server starts
 	app.listen(process.env.PUBLIC_PORT, () => {
 		console.log('Server started')
