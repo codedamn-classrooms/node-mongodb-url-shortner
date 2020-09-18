@@ -13,7 +13,6 @@ app.get('/', (req, res) => {
 
 app.post('/short', async (req, res) => {
 	// Grab the fullUrl parameter from the req.body
-	const fullUrl = req.body.fullUrl
 
 	// insert and wait for the record to be inserted using the model
 
