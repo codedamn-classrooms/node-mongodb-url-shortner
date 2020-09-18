@@ -2,6 +2,7 @@ const express = require('express')
 const app = express()
 const mongoose = require('mongoose')
 // import the model here
+const ShortURL = require('./models/url')
 
 app.set('view engine', 'ejs')
 
@@ -11,7 +12,11 @@ app.get('/', (req, res) => {
 
 app.post('/short', (req, res) => {
 	// insert the record using the model
-
+	new ShortURL({
+		full: 'test',
+		short: 't',
+		clicks: 0
+	})
 	res.json({ ok: 1 })
 })
 
