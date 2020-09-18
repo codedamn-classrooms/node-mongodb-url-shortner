@@ -27,6 +27,19 @@ app.post('/short', async (req, res) => {
 	res.redirect('/')
 })
 
+app.get('/:shortid', async (req, res) => {
+	// grab the :shortid param
+	const shortid = ''
+
+	// perform the mongoose call to find the long URL
+
+	// if null, set status to 404 (res.sendStatus(404))
+
+	// if not null, increment the click count in database
+
+	// redirect the user to original link
+})
+
 // Setup your mongodb connection here
 mongoose.connect('mongodb://localhost/codedamn', {
 	useNewUrlParser: true,
@@ -37,7 +50,7 @@ mongoose.connection.on('open', async () => {
 	// Wait for mongodb connection before server starts
 
 	// Just 2 URLs for testing purpose
-	await ShortURL.create({ full: 'http://google.com' })
+	await ShortURL.create({ full: 'http://google.com', short: '5xr' })
 	await ShortURL.create({ full: 'http://codedamn.com' })
 
 	app.listen(process.env.PUBLIC_PORT, () => {
