@@ -5,7 +5,7 @@ const mongoose = require('mongoose')
 app.set('view engine', 'ejs')
 
 app.get('/', (req, res) => {
-	res.render('index', { myVariable: 'My name is John!' })
+	res.render('index')
 })
 
 app.post('/short', (req, res) => {
