@@ -8,7 +8,8 @@ app.set('view engine', 'ejs')
 app.use(express.urlencoded({ extended: false }))
 
 app.get('/', (req, res) => {
-	res.render('index', { shortUrls: [{ full: 'test', short: 'test', clicks: 2 }] })
+	const allData = [] // write a mongoose query to get all URLs from here
+	res.render('index', { shortUrls: allData })
 })
 
 app.post('/short', async (req, res) => {
@@ -32,8 +33,13 @@ mongoose.connect('mongodb://localhost/codedamn', {
 	useUnifiedTopology: true
 })
 
-mongoose.connection.on('open', () => {
+mongoose.connection.on('open', async () => {
 	// Wait for mongodb connection before server starts
+
+	// Just 2 URLs for testing purpose
+	await ShortURL.create({ full: 'http://google.com' })
+	await ShortURL.create({ full: 'http://codedamn.com' })
+
 	app.listen(process.env.PUBLIC_PORT, () => {
 		console.log('Server started')
 	})
