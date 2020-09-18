@@ -29,15 +29,20 @@ app.post('/short', async (req, res) => {
 
 app.get('/:shortid', async (req, res) => {
 	// grab the :shortid param
-	const shortid = ''
+	const shortid = req.params.shortid
 
 	// perform the mongoose call to find the long URL
+	const rec = await ShortURL.findOne({ short: shortid })
 
 	// if null, set status to 404 (res.sendStatus(404))
+	if (!rec) return res.sendStatus(404)
 
 	// if not null, increment the click count in database
+	rec.clicks++
+	await rec.save()
 
 	// redirect the user to original link
+	res.redirect(rec.full)
 })
 
 // Setup your mongodb connection here
