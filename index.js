@@ -8,7 +8,7 @@ app.set('view engine', 'ejs')
 app.use(express.urlencoded({ extended: false }))
 
 app.get('/', (req, res) => {
-	res.render('index')
+	res.render('index', { shortUrls: [{ full: 'test', short: 'test', clicks: 2 }] })
 })
 
 app.post('/short', async (req, res) => {
